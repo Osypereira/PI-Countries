@@ -1,33 +1,19 @@
 const { Activity, Country } = require("../db");
 
-const createActivity = async (name, dificulty, duration, season, countryId) => {
-
+const createActivity = async (activitis) => {
+        const{name, dificulty, duration, season, countries} = activitis
     try {
         
-            const activity = await Activity.create({ name, dificulty, duration, season })
-        const thisCountry = await Country.findByPk(countryId)
+        const activity = await Activity.create({ name, dificulty, duration, season })
+        for(let id of countries) {
+            const thisCountry = await Country.findByPk(id)
        
             await activity.addCountry(thisCountry)
+            
+        }
 
 
-            let allActivityCountry = await Activity.findOne({
-                where: {
-                    name: name
-                },
-                attributes: {
-                    exclude: ["updateAt", "createdAt"]
-                },
-                include:[ {
-                    model: Country,
-                    attributes: ["name"],
-                    through: {
-                        attributes: []
-                    }
-                }]
-            });
-            return allActivityCountry
-      
-       
+            return
     } catch (error) {
         throw new Error("algo no esta bien, no se creo la actividad")
     }
@@ -38,9 +24,9 @@ const createActivity = async (name, dificulty, duration, season, countryId) => {
 
 // todas las actividades
 const getAllActivitiesControllers = async () => {
-    const activities = await Activity.findAll({
+    const activities = await Country.findAll({
         include: [{
-            model: Country, 
+            model: Activity, 
             attributes: ["id", "name"],
             through: {
                 attributes: []
