@@ -1,4 +1,7 @@
-import { GET_ALL_COUNTRIES } from "./actionType"
+import {
+    GET_ALL_COUNTRIES, FILTER_PAG, GET_ALL_ACTIVITIES, GET_DETAILS, GET_BY_NAME,
+
+} from "./actionType"
 
 const initialState = {
     countries: [],
@@ -21,6 +24,29 @@ const rootReducer = (state = initialState, action) => {
                 allCountries: action.payload,
                 lettersId: action.payload
             }
+        case FILTER_PAG:
+            return {
+                ...state,
+                pag: action.payload
+            }
+        case GET_ALL_ACTIVITIES:
+            return {
+                ...state,
+                allActivities: action.payload,
+                activities: action.payload 
+            }
+        case GET_DETAILS:
+            return {
+                ...state,
+                pag: 1,
+                detail: action.payload
+            }
+        case GET_BY_NAME:
+            return {
+                ...state,
+                countries: action.payload
+            }
+        
         default:
             return { ...state };
     }
