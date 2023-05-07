@@ -1,4 +1,4 @@
-import { GET_ALL_COUNTRIES, FILTER_PAG, GET_ALL_ACTIVITIES, GET_DETAILS, GET_BY_NAME } from "./actionType"
+import { GET_ALL_COUNTRIES, FILTER_PAG, GET_ALL_ACTIVITIES, GET_DETAILS, GET_BY_NAME, FILTER } from "./actionType"
 import axios from "axios";
 
 
@@ -12,7 +12,6 @@ export function getAllCountries() {
         }
     }
 }
-
 export const pagNum = (number) => {
     return async (dispatch) => {
         dispatch({
@@ -21,7 +20,6 @@ export const pagNum = (number) => {
         })
     }
 }
-
 export function getAllActivities() {
     return async(dispatch) => {
         try {
@@ -31,19 +29,19 @@ export function getAllActivities() {
             console.log("error", error.message)
         }
     }
-    
 }
-
 export const getDetail = (id) => {
+  
     return async (dispatch) => {
+        
         try {
             const json = await axios.get(`http://localhost:3001/country/${id}`);
-            console.log(json.data);
+           
+            
             dispatch({
                 type: GET_DETAILS,
                 payload: json.data
-
-            });
+           });
         } catch (error) {
             console.log("Error, Not ID", error);
         }
@@ -64,7 +62,6 @@ export  function getByName (name)  {
     }
 }
 export function postActivities(activity) {
-    
     return async () => {
         try {
             console.log(activity)
@@ -73,7 +70,17 @@ export function postActivities(activity) {
        } catch (error) {
            console.log(error);
        } 
-
+    }
+}
+export function filterCountry(country) {
+    return  (dispatch) => {
+        try {
+            console.log(country)
+            return dispatch({
+                 type: FILTER, payload: country
+             }) 
+        } catch (error) {
+        }
     }
 }
 

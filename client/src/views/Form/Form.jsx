@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";// eslint-disable-line
 import { useDispatch, useSelector } from "react-redux";// eslint-disable-line
 import { getAllCountries, postActivities } from "../../components/redux/actions"; // 
-import Style from "../Form/Form.module.css";  // eslint-disable-line
+import style from "../Form/Form.module.css";  // eslint-disable-line
 
 
 
@@ -33,7 +33,6 @@ const Form = () => {
         const value = event.target.value
 
         setForm({ ...form, [property]: value })
-        
     }
 
     const [names, setNames] = useState([])
@@ -48,28 +47,27 @@ const Form = () => {
             countries: [...form.countries, event]
         })
       }
-
     }
+
     const selectDificultyHandler = (event) => {
         setForm({
             ...form,
             dificulty: Number(event.target.value)
         })
-       
     }
+
     const selectDurationHandler = (event) => {
         setForm({
             ...form,
             duration: Number(event.target.value)
         })
-     
     }
+    
     const selectSeasonHandler = (event) => {
         setForm({
             ...form,
             season: event.target.value
         })
-      
     }
 
     const deleteFlagHandler = (id) => {
@@ -78,10 +76,9 @@ const Form = () => {
         setNames(names.filter(c => c.id !== id))
     }
 
-
     // ---------------- submit ----------------//
     const handlerSubmit = (e) => {
-         e.preventDefault();
+        e.preventDefault();
         dispatch(postActivities(form))
         alert(`You have been created the new activity ${form.name}`)
         setForm({
@@ -125,39 +122,38 @@ const Form = () => {
         return errors
     }
 
-    
-
-
     return (
-        <form className={Style.container} onSubmit={handlerSubmit}>
+        <div className={style.container}>
+
+        <form className={style.containerForm} onSubmit={handlerSubmit}>
             <div>
                 <div>
-                    <label>NAME</label>
+                    <label className={style.lether}>NAME:</label>
                    
                     <input placeholder="NAME IS REQUIRED" type="text" 
                            value={form.name} onChange={changeInputHandler} name="name"    
-                        autoComplete="off" className={Style.box} />
-                    {error.name && <span className={Style.Error}>{error.name}</span>}
+                        autoComplete="off" className={style.lether} />
+                    {error.name && <span className={style.error}>{error.name}</span>}
                 </div>
-                    <span>DIFICULTY</span>
                 <div>
-                    <select className={Style.box} onChange={selectDificultyHandler}>
+                    <span className={style.lether}>DIFICULTY:</span>
+                    <select className={style.lether} onChange={selectDificultyHandler}>
                         <option value="" hidden>-</option>
                         {dificultySelect.map(item => <option key={item} name="dificulty" value={item}>{item}</option>)}
                     </select>
-                    {error.dificulty && <span className={Style.error}>{error.dificulty}</span>}
+                    {error.dificulty && <span className={style.error}>{error.dificulty}</span>}
                 </div>
-                <span>DURATION</span>
                 <div>
-                    <select className={Style.box} onChange={selectDurationHandler}>
+                <span className={style.lether}>DURATION:</span>
+                    <select className={style.lether} onChange={selectDurationHandler}>
                         <option value="" hidden>-</option>
                         {durationSelect.map(item => <option key={item} name="duration" value={item}>{item}</option>)}
                     </select>
-                    {error.duration && <span className={Style.error}>{error.duration}</span>}
+                    {error.duration && <span className={style.error}>{error.duration}</span>}
                 </div>
-                <span>SEASON</span>
                 <div>
-                    <select className={Style.box} onChange={selectSeasonHandler}>
+                <span className={style.lether}>SEASON:</span>
+                    <select className={style.lether} onChange={selectSeasonHandler}>
                         <option value="" hidden>-</option>
                         <option name="SUMMER" value="summer">SUMMER</option>
                         <option name="FALL" value="fall">FALL</option>
@@ -165,40 +161,40 @@ const Form = () => {
                         <option name="SPRING" value="spring">SPRING</option>
                         
                     </select>
-                    {error.season && <span className={Style.error}>{error.season}</span>}
+                    {error.season && <span className={style.error}>{error.season}</span>}
                 </div>
-                <label>COUNTRIES</label>
                 <div>
-                    <select className={Style.box} onChange={(e) => selectCountryHandler(e.target.value)}>
+                <label className={style.lether}>COUNTRIES:</label>
+                    <select className={style.lether} onChange={(e) => selectCountryHandler(e.target.value)}>
                         <option value="" hidden>-</option>
                         {count?.map(item => {
                            return (<option key={item.id} value={item.id}>{item.name.toUpperCase()}</option>)
                         })}
                     </select>
-                    {error.countries && <span className={Style.error}>{error.countries}</span>}
+                    {error.countries && <span className={style.error}>{error.countries}</span>}
                 </div>
-                <div className={Style.buttonContainer}>
+                <div className={style.buttonContainer}>
                     {Object.entries(error).length === 0 &&
-                        <button className={Style.button}
+                        <button className={style.button}
                             type="submit">ADD ACTIVITY
                         </button>}
                 </div>
 
             </div>
-            <div className={Style.countriesFlags}>
+            <div className={style.countriesFlags}>
                 {
                     names.map(country =>
                         <div key={country.id}>
-                            <button className={Style.deleteButton}
+                            <button className={style.deleteButton}
                                 onClick={() => deleteFlagHandler(country.id)}>x</button>
-                            <img className={Style.flags} src={country.flagImage} alt={country.name}>
-                            </img>
+                            <h3>{country.name}</h3>
                         </div>
                     )
                 }
             </div>
 
         </form>
+        </div>
     )
 }
 

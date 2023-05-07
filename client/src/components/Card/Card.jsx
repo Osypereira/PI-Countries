@@ -1,11 +1,11 @@
-import style from "./Card.module.css"
+import Style from "./Card.module.css"
 import { Link } from "react-router-dom"
 
 const Card = (props) => {
     return (
-        <div className={style.card}>
-            <Link to={`/detail/$props{id}`}
-            style={{textDecoration: "none", color: "red"}}
+        <div className={Style.card}>
+            <Link to={`/detail/${props.id}`}
+            style={{textDecoration: "none", color: "white"}}
             >
             <img src={props.imgflag} alt="flag"/>
             <p>Name:{props.name}</p>

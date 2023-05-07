@@ -11,8 +11,12 @@ const NavBar = () => {
 
     return (
         <div className={style.mainContainer}>
-            <Link to="/home">HOME</Link>
-            <Link to="/create">FORM</Link>
+            <Link to="/home">
+                <button className={style.button}>HOME</button>
+            </Link>
+            <Link to="/create">
+                <button className={style.button2}>FORM</button>
+            </Link>
             <form onChange={handleChange}>
                 <input type="Search" />
             </form>

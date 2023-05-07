@@ -1,8 +1,15 @@
+
+
 .container{
-    border: 1px solid black;
-    display: flex;
-    flex-direction: row;
-    border-radius: 15px;
-    flex-wrap: wrap;
-    gap: 1em;
+    width: 85vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 20px auto;
+    background-image: ("../../images/home/module.css");
+    height: 10vh;
+    width: 100%;
+    object-fit: cover;
+    max-width: 1200px;
+    gap: 110px;
+    border: 1px
 }

@@ -1,6 +1,6 @@
 import {
     GET_ALL_COUNTRIES, FILTER_PAG, GET_ALL_ACTIVITIES, GET_DETAILS, GET_BY_NAME,
-
+    FILTER
 } from "./actionType"
 
 const initialState = {
@@ -46,6 +46,13 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 countries: action.payload
             }
+        case FILTER:
+            return {
+                ...state,
+                countries: action.payload,
+                pag: 1
+            }
+        
         
         default:
             return { ...state };
