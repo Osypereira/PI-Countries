@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar/NavBar"
 
 function App() {
   const location = useLocation();
-
+          //rutas
   return (
     <div className="App">
       {location.pathname !== "/" && <NavBar />}
